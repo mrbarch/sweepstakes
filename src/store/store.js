@@ -16,7 +16,8 @@ export const store = new Vuex.Store({
                 entries: 10,
                 startDate: "Feb 16 2018 10:00:00 AM",
                 endDate: "Feb 18 2018 11:00:00 AM",
-                status: ['Active', 'Scheduled', 'Inactive', 'Winner notified', 'Completed', 'Draft']
+                status: ['Active', 'Winner notified'],
+                actions: ['Promote']
             },
             {
                 id: 2,
@@ -26,7 +27,8 @@ export const store = new Vuex.Store({
                 entries: 9,
                 startDate: "Mar 20 2016 10:00:00 PM",
                 endDate: "Mar 27 2016 12:00:00 PM",
-                status: ['Active', 'Scheduled', 'Inactive', 'Winner notified', 'Completed', 'Draft']
+                status: ['Active', ''],
+                actions: ['Accept', 'Decline']
             },
             {
                 id: 3,
@@ -36,7 +38,8 @@ export const store = new Vuex.Store({
                 entries: 11,
                 startDate: "Jan 29 2001 4:00:00 PM",
                 endDate: "Jan 30 2001 7:00:00 PM",
-                status: ['Active', 'Scheduled', 'Inactive', 'Winner notified', 'Completed', 'Draft']
+                status: ['Inactive', 'Scheduled'],
+                actions: ['Promote']
             },
             {
                 id: 4,
@@ -46,7 +49,8 @@ export const store = new Vuex.Store({
                 entries: 10,
                 startDate: "Apr 11 2006 8:00:00 AM",
                 endDate: "Apr 14 2006 10:00:00 AM",
-                status: ['Active', 'Scheduled', 'Inactive', 'Winner notified', 'Completed', 'Draft']
+                status: ['Completed', ''],
+                actions: ['Accept', 'Decline']
             },
             {
                 id: 5,
@@ -56,7 +60,8 @@ export const store = new Vuex.Store({
                 entries: 10,
                 startDate: "Sep 28 2009 10:00:00 AM",
                 endDate: "Sep 29 2009 14:00:00 AM",
-                status: ['Active', 'Scheduled', 'Inactive', 'Winner notified', 'Completed', 'Draft']
+                status: ['Inactive', 'Draft'],
+                actions: ['Promote']
             },
             {
                 id: 6,
@@ -66,7 +71,8 @@ export const store = new Vuex.Store({
                 entries: 10,
                 startDate: "May 3 2017 5:00:00 PM",
                 endDate: "May 5 2017 8:00:00 AM",
-                status: ['Active', 'Scheduled', 'Inactive', 'Winner notified', 'Completed', 'Draft']
+                status: ['Inactive', 'Scheduled'],
+                actions: ['Promote']
             },
             {
                 id: 7,
@@ -76,7 +82,8 @@ export const store = new Vuex.Store({
                 entries: 10,
                 startDate: "Mar 14 2012 3:00:00 AM",
                 endDate: "Mar 16 2012 10:00:00 AM",
-                status: ['Active', 'Scheduled', 'Inactive', 'Winner notified', 'Completed', 'Draft']
+                status: ['Completed', ''],
+                actions: ['Accept', 'Decline']
             },
             {
                 id: 8,
@@ -86,7 +93,8 @@ export const store = new Vuex.Store({
                 entries: 10,
                 startDate: "Mar 22 2011 9:00:00 AM",
                 endDate: "Mar 24 2011 10:00:00 AM",
-                status: ['Active', 'Scheduled', 'Inactive', 'Winner notified', 'Completed', 'Draft']
+                status: ['Active', ''],
+                actions: ['Promote']
             },
             {
                 id: 9,
@@ -96,7 +104,8 @@ export const store = new Vuex.Store({
                 entries: 10,
                 startDate: "June 7 2010 1:00:00 AM",
                 endDate: "June 14 2010 3:00:00 AM",
-                status: ['Active', 'Scheduled', 'Inactive', 'Winner notified', 'Completed', 'Draft']
+                status: ['Scheduled', ''],
+                actions: ['Accept', 'Decline']
             },
             {
                 id: 10,
@@ -106,7 +115,8 @@ export const store = new Vuex.Store({
                 entries: 10,
                 startDate: "July 12 2014 6:00:00 AM",
                 endDate: "July 13 2014 10:00:00 AM",
-                status: ['Active', 'Scheduled', 'Inactive', 'Winner notified', 'Completed', 'Draft']
+                status: ['Inactive', ''],
+                actions: ['Promote']
             },
             {
                 id: 11,
