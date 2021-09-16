@@ -1,20 +1,17 @@
 <template>
   <div id="">
-    <pagination />
     <mainPage />
+
   </div>
 </template>
 
 <script>
 import mainPage from './mainPage'
-import pagination from './pagination'
-
 
 export default {
   name: '',
   components: {
     mainPage,
-    pagination,
   }
 }
 </script>

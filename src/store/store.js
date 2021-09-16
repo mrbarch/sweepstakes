@@ -14,8 +14,8 @@ export const store = new Vuex.Store({
                 focus: 'Contraceptive Health',
                 raised: 5,
                 entries: 10,
-                startDate: "Feb 16 2018 10:00:00 AM",
-                endDate: "Feb 18 2018 11:00:00 AM",
+                startDate: "05/10/2020, 11:00 EST",
+                endDate: "15/11/2021, 14:00 EST",
                 status: ['Active', 'Winner notified'],
                 actions: ['Promote']
             },
@@ -25,8 +25,8 @@ export const store = new Vuex.Store({
                 focus: 'Childcare',
                 raised: 7,
                 entries: 9,
-                startDate: "Mar 20 2016 10:00:00 PM",
-                endDate: "Mar 27 2016 12:00:00 PM",
+                startDate: "15/11/2000, 14:00 EST",
+                endDate: "16/12/2001, 18:00 EST",
                 status: ['Active', ''],
                 actions: ['Accept', 'Decline']
             },
@@ -36,8 +36,8 @@ export const store = new Vuex.Store({
                 focus: 'Education',
                 raised: 3,
                 entries: 11,
-                startDate: "Jan 29 2001 4:00:00 PM",
-                endDate: "Jan 30 2001 7:00:00 PM",
+                startDate: "05/04/2008, 08:00 EST",
+                endDate: "15/09/2008, 11:00 EST",
                 status: ['Inactive', 'Scheduled'],
                 actions: ['Promote']
             },
@@ -47,8 +47,8 @@ export const store = new Vuex.Store({
                 focus: 'Medical Infrastructure',
                 raised: 8,
                 entries: 10,
-                startDate: "Apr 11 2006 8:00:00 AM",
-                endDate: "Apr 14 2006 10:00:00 AM",
+                startDate: "07/01/2006, 06:00 EST",
+                endDate: "13/02/2006, 18:00 EST",
                 status: ['Completed', ''],
                 actions: ['Accept', 'Decline']
             },
@@ -58,8 +58,8 @@ export const store = new Vuex.Store({
                 focus: 'Food Access',
                 raised: 12,
                 entries: 10,
-                startDate: "Sep 28 2009 10:00:00 AM",
-                endDate: "Sep 29 2009 14:00:00 AM",
+                startDate: "11/06/1997, 15:00 EST",
+                endDate: "27/08/1998, 18:00 EST",
                 status: ['Inactive', 'Draft'],
                 actions: ['Promote']
             },
@@ -69,8 +69,8 @@ export const store = new Vuex.Store({
                 focus: 'Clothing Drive',
                 raised: 1,
                 entries: 10,
-                startDate: "May 3 2017 5:00:00 PM",
-                endDate: "May 5 2017 8:00:00 AM",
+                startDate: "02/06/2021, 20:00 EST",
+                endDate: "25/06/2021, 11:00 EST",
                 status: ['Inactive', 'Scheduled'],
                 actions: ['Promote']
             },
@@ -80,8 +80,8 @@ export const store = new Vuex.Store({
                 focus: 'Vaccines',
                 raised: 1.6,
                 entries: 10,
-                startDate: "Mar 14 2012 3:00:00 AM",
-                endDate: "Mar 16 2012 10:00:00 AM",
+                startDate: "18/08/2007, 19:00 EST",
+                endDate: "23/10/2008, 23:00 EST",
                 status: ['Completed', ''],
                 actions: ['Accept', 'Decline']
             },
@@ -91,8 +91,8 @@ export const store = new Vuex.Store({
                 focus: 'Water Independence',
                 raised: 5,
                 entries: 10,
-                startDate: "Mar 22 2011 9:00:00 AM",
-                endDate: "Mar 24 2011 10:00:00 AM",
+                startDate: "16/02/2013, 01:00 EST",
+                endDate: "17/03/2014, 02:00 EST",
                 status: ['Active', ''],
                 actions: ['Promote']
             },
@@ -102,8 +102,8 @@ export const store = new Vuex.Store({
                 focus: 'Prenatal Health',
                 raised: 11,
                 entries: 10,
-                startDate: "June 7 2010 1:00:00 AM",
-                endDate: "June 14 2010 3:00:00 AM",
+                startDate: "22/12/2019, 23:00 EST",
+                endDate: "01/03/2020, 06:00 EST",
                 status: ['Scheduled', ''],
                 actions: ['Accept', 'Decline']
             },
@@ -113,8 +113,8 @@ export const store = new Vuex.Store({
                 focus: 'Childcare',
                 raised: 71,
                 entries: 10,
-                startDate: "July 12 2014 6:00:00 AM",
-                endDate: "July 13 2014 10:00:00 AM",
+                startDate: "22/09/2015, 04:00 EST",
+                endDate: "29/10/2015, 07:00 EST",
                 status: ['Inactive', ''],
                 actions: ['Promote']
             },
@@ -124,9 +124,10 @@ export const store = new Vuex.Store({
                 focus: 'Contraceptive Health',
                 raised: 5,
                 entries: 10,
-                startDate: "Feb 16 2018 10:00:00 AM",
-                endDate: "Feb 18 2018 11:00:00 AM",
-                status: ['Active', 'Scheduled', 'Inactive', 'Winner notified', 'Completed', 'Draft']
+                startDate: "05/10/2020, 11:00 EST",
+                endDate: "15/11/2021, 14:00 EST",
+                status: ['Active', 'Winner notified'],
+                actions: ['Promote']
             },
             {
                 id: 12,
@@ -134,9 +135,10 @@ export const store = new Vuex.Store({
                 focus: 'Childcare',
                 raised: 7,
                 entries: 9,
-                startDate: "Mar 20 2016 10:00:00 PM",
-                endDate: "Mar 27 2016 12:00:00 PM",
-                status: ['Active', 'Scheduled', 'Inactive', 'Winner notified', 'Completed', 'Draft']
+                startDate: "15/11/2000, 14:00 EST",
+                endDate: "16/12/2001, 18:00 EST",
+                status: ['Active', ''],
+                actions: ['Accept', 'Decline']
             },
             {
                 id: 13,
@@ -144,9 +146,10 @@ export const store = new Vuex.Store({
                 focus: 'Education',
                 raised: 3,
                 entries: 11,
-                startDate: "Jan 29 2001 4:00:00 PM",
-                endDate: "Jan 30 2001 7:00:00 PM",
-                status: ['Active', 'Scheduled', 'Inactive', 'Winner notified', 'Completed', 'Draft']
+                startDate: "05/04/2008, 08:00 EST",
+                endDate: "15/09/2008, 11:00 EST",
+                status: ['Inactive', 'Scheduled'],
+                actions: ['Promote']
             },
             {
                 id: 14,
@@ -154,9 +157,10 @@ export const store = new Vuex.Store({
                 focus: 'Medical Infrastructure',
                 raised: 8,
                 entries: 10,
-                startDate: "Apr 11 2006 8:00:00 AM",
-                endDate: "Apr 14 2006 10:00:00 AM",
-                status: ['Active', 'Scheduled', 'Inactive', 'Winner notified', 'Completed', 'Draft']
+                startDate: "07/01/2006, 06:00 EST",
+                endDate: "13/02/2006, 18:00 EST",
+                status: ['Completed', ''],
+                actions: ['Accept', 'Decline']
             },
             {
                 id: 15,
@@ -164,9 +168,10 @@ export const store = new Vuex.Store({
                 focus: 'Food Access',
                 raised: 12,
                 entries: 10,
-                startDate: "Sep 28 2009 10:00:00 AM",
-                endDate: "Sep 29 2009 14:00:00 AM",
-                status: ['Active', 'Scheduled', 'Inactive', 'Winner notified', 'Completed', 'Draft']
+                startDate: "11/06/1997, 15:00 EST",
+                endDate: "27/08/1998, 18:00 EST",
+                status: ['Inactive', 'Draft'],
+                actions: ['Promote']
             },
             {
                 id: 16,
@@ -174,9 +179,10 @@ export const store = new Vuex.Store({
                 focus: 'Clothing Drive',
                 raised: 1,
                 entries: 10,
-                startDate: "May 3 2017 5:00:00 PM",
-                endDate: "May 5 2017 8:00:00 AM",
-                status: ['Active', 'Scheduled', 'Inactive', 'Winner notified', 'Completed', 'Draft']
+                startDate: "02/06/2021, 20:00 EST",
+                endDate: "25/06/2021, 11:00 EST",
+                status: ['Inactive', 'Scheduled'],
+                actions: ['Promote']
             },
             {
                 id: 17,
@@ -184,9 +190,10 @@ export const store = new Vuex.Store({
                 focus: 'Vaccines',
                 raised: 1.6,
                 entries: 10,
-                startDate: "Mar 14 2012 3:00:00 AM",
-                endDate: "Mar 16 2012 10:00:00 AM",
-                status: ['Active', 'Scheduled', 'Inactive', 'Winner notified', 'Completed', 'Draft']
+                startDate: "18/08/2007, 19:00 EST",
+                endDate: "23/10/2008, 23:00 EST",
+                status: ['Completed', ''],
+                actions: ['Accept', 'Decline']
             },
             {
                 id: 18,
@@ -194,9 +201,10 @@ export const store = new Vuex.Store({
                 focus: 'Water Independence',
                 raised: 5,
                 entries: 10,
-                startDate: "Mar 22 2011 9:00:00 AM",
-                endDate: "Mar 24 2011 10:00:00 AM",
-                status: ['Active', 'Scheduled', 'Inactive', 'Winner notified', 'Completed', 'Draft']
+                startDate: "16/02/2013, 01:00 EST",
+                endDate: "17/03/2014, 02:00 EST",
+                status: ['Active', ''],
+                actions: ['Promote']
             },
             {
                 id: 19,
@@ -204,9 +212,10 @@ export const store = new Vuex.Store({
                 focus: 'Prenatal Health',
                 raised: 11,
                 entries: 10,
-                startDate: "June 7 2010 1:00:00 AM",
-                endDate: "June 14 2010 3:00:00 AM",
-                status: ['Active', 'Scheduled', 'Inactive', 'Winner notified', 'Completed', 'Draft']
+                startDate: "22/12/2019, 23:00 EST",
+                endDate: "01/03/2020, 06:00 EST",
+                status: ['Scheduled', ''],
+                actions: ['Accept', 'Decline']
             },
             {
                 id: 20,
@@ -214,16 +223,17 @@ export const store = new Vuex.Store({
                 focus: 'Childcare',
                 raised: 71,
                 entries: 10,
-                startDate: "July 12 2014 6:00:00 AM",
-                endDate: "July 13 2014 10:00:00 AM",
-                status: ['Active', 'Scheduled', 'Inactive', 'Winner notified', 'Completed', 'Draft']
+                startDate: "22/09/2015, 04:00 EST",
+                endDate: "29/10/2015, 07:00 EST",
+                status: ['Inactive', ''],
+                actions: ['Promote']
             },
         ],
     },
     methods: {
     },
     getters: {
-        sweepstakes(state) {
+        sweepstakes1(state) {
             return state.items
         },
         sortColumn(state) {

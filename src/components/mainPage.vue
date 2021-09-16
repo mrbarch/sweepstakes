@@ -1,5 +1,11 @@
 <template>
   <div class="container">
+    <ModalPromote v-if="activeModal === 'Promote'"
+                  @close="closeModal"
+    />
+    <ModalAccept v-if="activeModal === 'Accept'"
+                 @close="closeModal"
+    />
     <header class="header">
       <div class="header__title">Sweepstakes</div>
       <div class="header__filters-all">
@@ -8,84 +14,75 @@
             Filters:
           </div>
           <div class="header__filters-buttons">
-            <button class="header__filters-button">
+            <button class="header__filters-button"
+                    @click="setFilter('All')"
+            >
               All
             </button>
-            <button class="header__filters-button">
+            <button class="header__filters-button"
+                    @click="setFilter('lastTenActive')"
+            >
               10 Active
             </button>
-            <button class="header__filters-button">
+            <button class="header__filters-button"
+                    @click="setFilter('lastFourInactive')"
+            >
               4 Inactive
             </button>
-            <button class="header__filters-button">
+            <button class="header__filters-button"
+                    @click="setFilter('lastTwelveCompleted')"
+            >
               12 Completed
             </button>
           </div>
         </div>
         <div class="header__filters-right">
-          <div @click="dropDownToggle" class="dropdown">
-            <div class="dropdown__range">SHOWING {{ this.numberPerPage }} OF {{ this.sweepstakes.length }}</div>
-            <div class="dropdown__text">ROWS PER PAGE:</div>
-            <button class="dropdown__btn">{{ this.numberPerPage }}<img
-                class="dropdown__btn-arrow"
-                src="../assets/images/arrow-top.png"
-                alt="arrow-top"
-            >
-            </button>
-            <div :class="{show: isDropDown}" id="myDropdown" class="dropdown-content">
-              <a @click="changeAmount(10)" class="dropdown-content-item" href="#">10</a>
-              <a @click="changeAmount(20)" class="dropdown-content-item" href="#">20</a>
-              <a @click="changeAmount(30)" class="dropdown-content-item" href="#">30</a>
-              <a @click="changeAmount(40)" class="dropdown-content-item" href="#">40</a>
-            </div>
-          </div>
-          <div class="pagination">
-            <button class="pagination__btn" @click="currentMinus"><img
-                class="pagination__btn-img"
-                src="../assets/images/arrow-left.png"
-                alt="pagination__btn">
-            </button>
-            <div class="current__page">{{ currentPage }}</div>
-            <button class="pagination__btn" @click="currentPage += 1"><img
-                class="pagination__btn-img"
-                src="../assets/images/arrow-right.png"
-                alt="pagination__btn">
-            </button>
-          </div>
+          <DropDown @setNumberPerPage="setNumberPerPage"/>
+          <Pagination @setPage="setPage"/>
         </div>
       </div>
       <div class="header__table">
         <div class="header__table-title">
           <div class="header__table-filters">
-            <div class="header__table-filter" @click="sortByAlphabet('title')">
+            <div class="header__table-filter"
+                 @click="sortByAlphabet('title')"
+            >
               Title
               <template v-if="sortColumn === 'title'">
                 <p :class="{ active: sortDirection === 'up' }">&#9650;</p>
                 <p :class="{ active: sortDirection === 'down' }">&#9660;</p>
               </template>
             </div>
-            <div class="header__table-filter" @click="sortByAlphabet('focus')">
+            <div class="header__table-filter"
+                 @click="sortByAlphabet('focus')"
+            >
               Focus
               <template v-if="sortColumn === 'focus'">
                 <p :class="{ active: sortDirection === 'up' }">&#9650;</p>
                 <p :class="{ active: sortDirection === 'down' }">&#9660;</p>
               </template>
             </div>
-            <div class="header__table-filter" @click="sortByNumber('raised')">
+            <div class="header__table-filter"
+                 @click="sortByNumber('raised')"
+            >
               Raised
               <template v-if="sortColumn === 'raised'">
                 <p :class="{ active: sortDirection === 'up' }">&#9650;</p>
                 <p :class="{ active: sortDirection === 'down' }">&#9660;</p>
               </template>
             </div>
-            <div class="header__table-filter" @click="sortByNumber('entries')">
+            <div class="header__table-filter"
+                 @click="sortByNumber('entries')"
+            >
               Entries
               <template v-if="sortColumn === 'entries'">
                 <p :class="{ active: sortDirection === 'up' }">&#9650;</p>
                 <p :class="{ active: sortDirection === 'down' }">&#9660;</p>
               </template>
             </div>
-            <div class="header__table-filter" @click="sortByDate('status')">
+            <div class="header__table-filter"
+                 @click="sortByDate('status')"
+            >
               Status
               <template v-if="sortColumn === 'status'">
                 <p :class="{ active: sortDirection === 'up' }">&#9650;</p>
@@ -114,19 +111,32 @@
               </template>
             </div>
           </div>
-          <div class="header__table-items" :key="item.id" v-for="item of list">
+          <div class="header__table-items"
+               :key="item.id"
+               v-for="item of list"
+          >
             <div class="header__table-items-title">{{ item.title }}</div>
             <div class="header__table-items-focus">{{ item.focus }}</div>
             <div class="header__table-items-raised">${{ item.raised.toFixed(3) }}</div>
             <div class="header__table-items-entries">{{ item.entries }}</div>
             <div class="header__table-items-status-all">
-              <div class="header__table-items-status" :key="status" v-for="status of item.status"
-                   :class="`status__${status}`">{{ status }}
+              <div class="header__table-items-status header__table-items-status-general"
+                   :key="status"
+                   v-for="status of item.status"
+                   :class="`status__${status}`"
+              >
+                {{ status }}
               </div>
             </div>
             <div class="header__table-items-actions-all">
-              <button class="header__table-items-actions" :key="actions" v-for="actions of item.actions"
-                   :class="`actions__${actions}`">{{ actions }}
+              <button
+                  id="show-modal"
+                  class="header__table-items-actions header__table-items-actions-general"
+                  :key="action" v-for="action of item.actions"
+                  @click="differentiateModal(item, action)"
+                  :class="`actions__${action}`"
+              >
+                {{ action }}
               </button>
             </div>
             <div class="header__table-items-startDate">{{ item.startDate }}</div>
@@ -135,20 +145,32 @@
         </div>
       </div>
     </header>
+
   </div>
 </template>
 
 <script>
 import {mapMutations} from 'vuex';
+import ModalPromote from "./ModalPromote";
+import ModalAccept from "./ModalAccept"
+import Pagination from "./Pagination";
+import DropDown from "./DropDown"
 
 export default {
   name: 'mainPage',
+  components: {
+    ModalPromote,
+    ModalAccept,
+    Pagination,
+    DropDown
+  },
   data: function () {
     return {
       isActive: false,
       currentPage: 1,
       numberPerPage: 10,
-      isDropDown: false
+      activeFilter: null,
+      activeModal: null
     }
   },
   computed: {
@@ -164,28 +186,38 @@ export default {
     list() {
       let items = this.sweepstakes
       let amountItems = this.currentPage * this.numberPerPage
+      if(this.activeFilter === 'lastTenActive') {
+        items = items.filter(sweepstakes => sweepstakes.status.includes('Active'))
+      }
+      if(this.activeFilter === 'lastFourInactive') {
+        items = items.filter(sweepstakes => sweepstakes.status.includes('Inactive'))
+      }
+      if(this.activeFilter === 'lastTwelveCompleted') {
+        items = items.filter(sweepstakes => sweepstakes.status.includes('Completed'))
+      }
+      if(this.activeFilter === 'All') {
+        items = this.sweepstakes
+      }
       return items.slice(amountItems - this.numberPerPage, amountItems)
     },
-    status() {
-      console.log(this.$store.state.items[status])
-      return this.$store.state.items[status]
-    }
   },
   methods: {
-    currentMinus() {
-      if (this.currentPage > 1) {
-        this.currentPage--
-      }
+    setPage(page) {
+      this.currentPage = page
+    },
+    setNumberPerPage(numberPerPage) {
+      this.numberPerPage = numberPerPage
+    },
+    setFilter(filter) {
+      this.activeFilter = filter
+    },
+    closeModal() {
+      this.activeModal = null
+    },
+    differentiateModal(sweepstake, action) {
+      this.activeModal = action
     },
     ...mapMutations(['sortByAlphabet', 'sortByNumber', 'sortByDate']),
-    changeAmount(item) {
-      this.numberPerPage = item
-      console.log(item.value)
-    },
-    dropDownToggle() {
-      this.isDropDown = !this.isDropDown
-    },
-
   }
 }
 </script>
@@ -194,258 +226,79 @@ export default {
 .actions {
   &__Promote {
     border: 1px solid #6DB5D1;
-    box-sizing: border-box;
-    border-radius: 35px;
-    font-family: InterMedium, sans-serif;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #FFFFFF;
-    height: 32px;
     width: 99px;
     background: url(../assets/images/promote-img.png) no-repeat 69px, #6DB5D1;
-    padding-right: 20px;
+    padding-right: 25px;
   }
+
   &__Accept {
-    border: 1px solid #71B078;
-    box-sizing: border-box;
-    border-radius: 35px;
-    font-family: InterMedium, sans-serif;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #FFFFFF;
-    height: 32px;
     width: 95px;
     background: url(../assets/images/accept-img.png) no-repeat 63px, #71B078;
-    padding-right: 21px;
+    padding-right: 27px;
+    border: 1px solid #71B078;
   }
+
   &__Decline {
     border: 1px solid #D3584B;
-    box-sizing: border-box;
-    border-radius: 35px;
-    font-family: InterMedium, sans-serif;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #FFFFFF;
-    height: 32px;
     width: 95px;
     margin-left: 8px;
     background: url(../assets/images/decline-img.png) no-repeat 66px, #D3584B;
-    padding-right: 20px;
+    padding-right: 26px;
   }
 }
+
 .status {
   &__Active {
     background: linear-gradient(0deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), #71B078;
-    border-radius: 40px;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #71B078;
     border: 1px solid #71B078;
-    font-family: InterMedium, sans-serif;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 15px;
-    height: 21px;
+    color: #71B078;
     width: 52px;
   }
 
   &__Winner {
     background: linear-gradient(0deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), #6DB5D1;
-    border-radius: 40px;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     color: #6DB5D1;
     border: 1px solid #6DB5D1;
-    font-family: InterMedium, sans-serif;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 15px;
-    height: 21px;
     width: 102px;
-    margin-left: 9px;
+    margin-left: 8px;
   }
 
   &__Inactive {
     background: linear-gradient(0deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), #D3584B;
-    border-radius: 35px;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     color: #D3584B;
     border: 1px solid #D3584B;
-    font-family: InterMedium, sans-serif;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 15px;
-    height: 21px;
     width: 60px;
     margin-right: 10px;
   }
 
   &__Completed {
     background: linear-gradient(0deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), #315B9C;
-    border-radius: 35px;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     color: #315B9C;
     border: 1px solid #315B9C;
-    font-family: InterMedium, sans-serif;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 15px;
-    height: 21px;
     width: 79px;
   }
 
   &__Scheduled {
     background: linear-gradient(0deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), #EDBC33;
-    border-radius: 35px;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     color: #EDBC33;
     border: 1px solid #EDBC33;
-    font-family: InterMedium, sans-serif;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 15px;
-    height: 21px;
     width: 75px;
   }
 
   &__Draft {
     background: linear-gradient(0deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), #9A83B7;
     border-radius: 35px;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     color: #9A83B7;
     border: 1px solid #9A83B7;
-    font-family: InterMedium, sans-serif;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 15px;
     width: 43px;
-    height: 21px;
   }
 }
-
-.dropdown {
-  position: relative;
-  display: flex;
-  width: 309px;
-
-  &__text {
-    font-family: Inter, sans-serif;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 12px;
-    line-height: 15px;
-    color: #A098AB;
-    width: 192px;
-    padding-top: 3px;
-  }
-
-  &__range {
-    font-family: Inter, sans-serif;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 12px;
-    line-height: 15px;
-    color: #A098AB;
-    width: 223px;
-    padding-top: 3px;
-  }
-
-  &__btn {
-    background-color: white;
-    height: 25px;
-    width: 88px;
-    cursor: pointer;
-    border: 1px solid #A098AB;
-    border-radius: 50px;
-    font-family: InterSemiBold, sans-serif;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 17px;
-    align-items: center;
-    text-align: center;
-    color: #A098AB;
-
-    &-arrow {
-      padding-left: 7px;
-      padding-bottom: 2px;
-    }
-  }
-}
-
 .rotate {
   transform: rotate(180deg);
 }
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f1f1f1;
-  min-width: 50px;
-  overflow: auto;
-  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-  z-index: 1;
-  top: 25px;
-  right: 3px;
-}
-
-.dropdown-content a {
-  font-family: InterSemiBold, sans-serif;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 17px;
-  color: #A098AB;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-}
-
-.dropdown a:hover {
-  background-color: #ddd;
-}
-
 .show {
   display: block;
 }
-
 .current {
   &__page {
     font-family: InterSemiBold, sans-serif;
@@ -459,30 +312,6 @@ export default {
   }
 }
 
-.pagination {
-  display: flex;
-  width: 80px;
-  justify-content: space-between;
-
-  &__btn {
-    background: #F2EEF9;
-    border-radius: 50%;
-    width: 25px;
-    height: 25px;
-    color: #63517A;
-    border: none;
-    font-size: 22px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-
-    &-img {
-      width: 4.74px;
-      height: 7.61px;
-    }
-  }
-}
 
 .container {
   margin: 42px auto;
@@ -614,7 +443,19 @@ button.page-link {
       }
 
       &-actions {
-
+        &-general {
+          box-sizing: border-box;
+          border-radius: 35px;
+          font-family: InterMedium, sans-serif;
+          font-size: 12px;
+          line-height: 15px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: #FFFFFF;
+          height: 32px;
+          cursor: pointer;
+        }
         &-all {
           display: flex;
           position: relative;
@@ -627,6 +468,16 @@ button.page-link {
       &-status {
         grid-column-start: 5;
         grid-column-end: 6;
+        &-general {
+          border-radius: 40px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-family: InterMedium, sans-serif;
+          font-size: 12px;
+          line-height: 15px;
+          height: 21px;
+        }
         &-all {
           display: flex;
           position: relative;
